@@ -4,3 +4,5 @@ build/
 .ccls-cache/
 .ccls_cache/
 compile_commands.json
+*.zip
+*.7z

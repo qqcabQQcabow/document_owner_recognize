@@ -6,3 +6,4 @@ build/
 compile_commands.json
 *.zip
 *.7z
+models/

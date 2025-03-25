@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-I/home/aladin/programming/malinski_3_sem/test_load_model/cppflow::cppflow",
+      "-isystem",
+      "/usr/include/opencv4",
+      "-c",
+      "-o",
+      "CMakeFiles/test_load.dir/main.cpp.o",
+      "/home/aladin/programming/malinski_3_sem/test_load_model/main.cpp"
+    ],
+    "directory": "/home/aladin/programming/malinski_3_sem/test_load_model/build",
+    "file": "/home/aladin/programming/malinski_3_sem/test_load_model/main.cpp",
+    "output": "/home/aladin/programming/malinski_3_sem/test_load_model/build/CMakeFiles/test_load.dir/main.cpp.o"
+  }
+]

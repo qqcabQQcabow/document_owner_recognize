@@ -1,0 +1,6 @@
+.cache
+.clangd-tidy
+build/
+.ccls-cache/
+.ccls_cache/
+compile_commands.json

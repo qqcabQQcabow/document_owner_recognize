@@ -24,7 +24,8 @@ class Recognizer
                 const std::string& out,
                 const int img_height_,
                 const int img_width_,
-                const std::vector<int64_t>& inp_tensor_shape;
+                const std::vector<int64_t>& inp_tensor_shape_,
+                const std::vector<std::string>& labels_names
             );
 
         std::vector<float> getPredictList(cv::Mat image);

@@ -64,6 +64,7 @@ private slots:
     void clearHandler();
 };
 namespace myFunc{
+    size_t getIndxMaxElement(const std::vector<float>& source);
     bool inRoi(const std::vector<cv::Point>& points, const cv::Point& roi_point);
     void normixRectanglePoints(std::vector<cv::Point>& points);
     cv::Mat getCropRect(const cv::Mat& source, const std::vector<cv::Point>& points);

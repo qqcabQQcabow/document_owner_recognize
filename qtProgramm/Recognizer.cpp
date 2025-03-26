@@ -8,8 +8,8 @@ Recognizer::Recognizer
     const std::string& out,
     const int img_height_,
     const int img_width_,
-    const std::vector<int64_t>& inp_tensor_shape_;
-    const std::vector<std::string>& labels_names;
+    const std::vector<int64_t>& inp_tensor_shape_,
+    const std::vector<std::string>& labels_names
 )
 :
     input_layer_name(inp),
@@ -18,7 +18,7 @@ Recognizer::Recognizer
     img_width(img_width_),
     inp_tensor_shape(inp_tensor_shape_),
     model(model_path),
-    labels(labels_name)
+    labels(labels_names)
 {
 }
 
@@ -31,7 +31,7 @@ std::vector<float> Recognizer::getPredictList(cv::Mat image)
     input_data.assign((float*)image.datastart, (float*)image.dataend);
 
     cppflow::tensor input_tensor(input_data, inp_tensor_shape);
-    std::vector<cppflow::tensor> output = model({{input_layer_name, input_tensor}},{outpu_layer_name});
+    std::vector<cppflow::tensor> output = model({{input_layer_name, input_tensor}},{output_layer_name});
     
     return output.at(0).get_data<float>();
 }

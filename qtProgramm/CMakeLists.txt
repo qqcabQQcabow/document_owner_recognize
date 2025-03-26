@@ -10,16 +10,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(cppflow REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 include_directories(
     /usr/include/opencv4
+    cppflow::cppflow
 )
 
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
+        Recognizer.h
+        Recognizer.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -46,6 +50,7 @@ else()
 endif()
 
 set(LINK_LIBS
+    cppflow::cppflow
     opencv_core
     opencv_imgcodecs
     opencv_videoio

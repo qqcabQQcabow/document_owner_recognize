@@ -14,8 +14,8 @@ const std::string output_layer = "StatefulPartitionedCall:0";
 const int img_h = 128;
 const int img_w = 128;
 const int color_chanels = 3;
-const std::vector<int64_t> inp_tensor_shape = {1, igm_h, img_w, color_canels};
-const std::vector<std::string> labels_names = {"", "", "", "", "", ""};
+const std::vector<int64_t> inp_tensor_shape = {1, img_h, img_w, color_chanels};
+const std::vector<std::string> labels_names = {"Объект 1", "Объект 2", "Объект 3", "Объект 4", "Неопознанный объект", "Объект 6"};
 
 const double resize_scale = 0.65;
 const int gap_crop_px = 3;
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     result_text(new QLabel(this)),
 
     result_container(new QWidget(this)),
-    thresh_input(new QLineEdit(this)),
+    //thresh_input(new QLineEdit(this)),
 
     buttons_layouts(new QHBoxLayout()),
     result_layout(new QHBoxLayout()),
@@ -38,10 +38,20 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     check_signature(new QPushButton(this)),
-    settings_button(new QPushButton(this)),
-    manual_select_area(new QPushButton(this)),
+    //settings_button(new QPushButton(this)),
+    //manual_select_area(new QPushButton(this)),
     clear_area(new QPushButton(this)),
-    get_image(new QPushButton(this))
+    get_image(new QPushButton(this)),
+    recognizer_tool
+        (
+            model_path,
+            input_layer,
+            output_layer,
+            img_h,
+            img_w,
+            inp_tensor_shape,
+            labels_names
+        )
 {
 
     image_viewer->setAlignment(Qt::AlignHCenter);
@@ -62,24 +72,24 @@ MainWindow::MainWindow(QWidget *parent)
                     QImage::Format_RGB888
                     )));
 
-    thresh_input->setFixedWidth(INPUT_THRESH_WIDTH);
-    thresh_input->setText("100");
+    //thresh_input->setFixedWidth(INPUT_THRESH_WIDTH);
+    //thresh_input->setText("100");
 
 
     check_signature->setText("Проверить");
 
-    settings_button->setText("Настройки");
+    //settings_button->setText("Настройки");
 
-    manual_select_area->setText("Ручной режим");
+    //manual_select_area->setText("Ручной режим");
 
     get_image->setText("Выбрать документ");
 
     clear_area->setText("Очистить");
 
     //buttons_layouts[0] = new QHBoxLayout(this);
-    buttons_layouts->addWidget(thresh_input);
-    buttons_layouts->addWidget(settings_button);
-    buttons_layouts->addWidget(manual_select_area);
+    //buttons_layouts->addWidget(thresh_input);
+    //buttons_layouts->addWidget(settings_button);
+    //buttons_layouts->addWidget(manual_select_area);
     buttons_layouts->addWidget(clear_area);
     buttons_layouts->addWidget(get_image);
 
@@ -102,34 +112,32 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Add buttons
     connect(check_signature, &QPushButton::released, this, &MainWindow::processDocument);
-    connect(settings_button, &QPushButton::released, this, &MainWindow::settingsHandler);
-    connect(manual_select_area, &QPushButton::released, this, &MainWindow::manualSelectHandler);
+    //connect(settings_button, &QPushButton::released, this, &MainWindow::settingsHandler);
+    //connect(manual_select_area, &QPushButton::released, this, &MainWindow::manualSelectHandler);
     connect(clear_area, &QPushButton::released, this, &MainWindow::clearHandler);
     connect(get_image, &QPushButton::released, this, &MainWindow::chooseDocument);
-
-const std::string model_path = "best_model.tf";
-const std::string input_layer = "serving_default_xception_input:0";
-const std::string output_layer = "StatefulPartitionedCall:0";
-const int img_h = 128;
-const int img_w = 128;
-const int color_chanels = 3;
-const std::vector<int64_t> inp_tensor_shape = {1, igm_h, img_w, color_canels};
-
-    recognizer_tool = Recognier
-        (
-            model_path,
-            input_layer,
-            output_layer,
-            img_h,
-            img_w,
-            inp_tensor_shape
-        );
 
 }
 
 MainWindow::~MainWindow() = default;
 
 namespace myFunc{
+
+    size_t getIndxMaxElement(const std::vector<float>& source)
+    {
+        auto cmp = std::max_element(source.begin(), source.end());
+        std::cout << "CMP IS : " << *cmp << std::endl;
+        size_t indx = 0;
+        for(auto it = source.begin(); it != source.end(); ++it){
+            std::cout << "source[" << indx << "] = " << *it << std::endl;
+            if(it == cmp){
+                return indx;
+            }
+            indx++;
+        }
+        throw std::runtime_error("FUCK: source size is: " + std::to_string(source.size()));
+
+    }
     bool inRoi(const std::vector<cv::Point>& points, const cv::Point& roi_point)
     {
         for(const auto& point : points){
@@ -240,14 +248,14 @@ void MainWindow::processDocument()
         return;
     }
 
-    int thresh = 0;
-    try{
-        thresh = thresh_input->text().toInt();
-    }
-    catch(...){
-        thresh = DEFAULT_THRESH;
-        std::cout << "Cant use thresh from input" << "\n";
-    }
+    int thresh = DEFAULT_THRESH;
+    //try{
+    //    thresh = thresh_input->text().toInt();
+    //}
+    //catch(...){
+    //    thresh = DEFAULT_THRESH;
+    //    std::cout << "Cant use thresh from input" << "\n";
+    //}
 
     cv::Mat src_gray;
     cv::cvtColor(source_image, src_gray, cv::COLOR_BGR2GRAY );
@@ -272,7 +280,9 @@ void MainWindow::processDocument()
 
     cv::Mat crop = myFunc::getCropRect(source_image, res);
 
-    QString recognize_rezult = "В работе";
+
+    auto predictions = recognizer_tool.getPredictList(crop);
+    QString recognize_rezult = QString::fromStdString(labels_names.at(myFunc::getIndxMaxElement(predictions)));
 
     result_text->setText("Документ утвердил: " + recognize_rezult);
     setCropViewer(crop);

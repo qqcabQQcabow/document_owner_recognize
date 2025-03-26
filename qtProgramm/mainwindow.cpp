@@ -8,6 +8,15 @@
 #define PAPER_PARTS_HEIGHT 5
 #define PAPER_PARTS_WIDTH 5
 
+const std::string model_path = "best_model.tf";
+const std::string input_layer = "serving_default_xception_input:0";
+const std::string output_layer = "StatefulPartitionedCall:0";
+const int img_h = 128;
+const int img_w = 128;
+const int color_chanels = 3;
+const std::vector<int64_t> inp_tensor_shape = {1, igm_h, img_w, color_canels};
+const std::vector<std::string> labels_names = {"", "", "", "", "", ""};
+
 const double resize_scale = 0.65;
 const int gap_crop_px = 3;
 
@@ -97,6 +106,24 @@ MainWindow::MainWindow(QWidget *parent)
     connect(manual_select_area, &QPushButton::released, this, &MainWindow::manualSelectHandler);
     connect(clear_area, &QPushButton::released, this, &MainWindow::clearHandler);
     connect(get_image, &QPushButton::released, this, &MainWindow::chooseDocument);
+
+const std::string model_path = "best_model.tf";
+const std::string input_layer = "serving_default_xception_input:0";
+const std::string output_layer = "StatefulPartitionedCall:0";
+const int img_h = 128;
+const int img_w = 128;
+const int color_chanels = 3;
+const std::vector<int64_t> inp_tensor_shape = {1, igm_h, img_w, color_canels};
+
+    recognizer_tool = Recognier
+        (
+            model_path,
+            input_layer,
+            output_layer,
+            img_h,
+            img_w,
+            inp_tensor_shape
+        );
 
 }
 
@@ -232,7 +259,7 @@ void MainWindow::processDocument()
     std::cout << "Call getSignatureCoords with thresh " << thresh << "\n";
     cv::Point roi_p = cv::Point(one_half_width, one_five_height*4);
     std::cout << "Roi " << one_half_width << "x" << one_five_height*4 << "\n";
-    //cv::Point roi_p = cv::Point(0, 0);
+
     auto res = myFunc::getSignatureCoords(canny_output, roi_p);
 
     if(res.size() != 4){
@@ -242,7 +269,9 @@ void MainWindow::processDocument()
     }
 
     myFunc::normixRectanglePoints(res);
+
     cv::Mat crop = myFunc::getCropRect(source_image, res);
+
     QString recognize_rezult = "В работе";
 
     result_text->setText("Документ утвердил: " + recognize_rezult);
@@ -250,6 +279,7 @@ void MainWindow::processDocument()
     result_container->setVisible(true);
 
     std::cout << "Find tops of rectangle:" << "\n";
+
     for(const auto& item : res){
         std::cout << "      " << item.x << "x" << item.y << "\n";
     }

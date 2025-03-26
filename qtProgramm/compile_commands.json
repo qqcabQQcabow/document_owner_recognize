@@ -6,7 +6,7 @@
       "-DQT_GUI_LIB",
       "-DQT_NO_DEBUG",
       "-DQT_WIDGETS_LIB",
-      "-I/home/aladin/programming/malinski_3_sem/qtProgramm/build/document_recognizer_autogen/include",
+      "-I/home/aladin/programming/document_owner_recognize/qtProgramm/build/document_recognizer_autogen/include",
       "-I/usr/include/opencv4",
       "-isystem",
       "/usr/include/qt",
@@ -23,11 +23,11 @@
       "-c",
       "-o",
       "CMakeFiles/document_recognizer.dir/document_recognizer_autogen/mocs_compilation.cpp.o",
-      "/home/aladin/programming/malinski_3_sem/qtProgramm/build/document_recognizer_autogen/mocs_compilation.cpp"
+      "/home/aladin/programming/document_owner_recognize/qtProgramm/build/document_recognizer_autogen/mocs_compilation.cpp"
     ],
-    "directory": "/home/aladin/programming/malinski_3_sem/qtProgramm/build",
-    "file": "/home/aladin/programming/malinski_3_sem/qtProgramm/build/document_recognizer_autogen/mocs_compilation.cpp",
-    "output": "/home/aladin/programming/malinski_3_sem/qtProgramm/build/CMakeFiles/document_recognizer.dir/document_recognizer_autogen/mocs_compilation.cpp.o"
+    "directory": "/home/aladin/programming/document_owner_recognize/qtProgramm/build",
+    "file": "/home/aladin/programming/document_owner_recognize/qtProgramm/build/document_recognizer_autogen/mocs_compilation.cpp",
+    "output": "/home/aladin/programming/document_owner_recognize/qtProgramm/build/CMakeFiles/document_recognizer.dir/document_recognizer_autogen/mocs_compilation.cpp.o"
   },
   {
     "arguments": [
@@ -36,7 +36,7 @@
       "-DQT_GUI_LIB",
       "-DQT_NO_DEBUG",
       "-DQT_WIDGETS_LIB",
-      "-I/home/aladin/programming/malinski_3_sem/qtProgramm/build/document_recognizer_autogen/include",
+      "-I/home/aladin/programming/document_owner_recognize/qtProgramm/build/document_recognizer_autogen/include",
       "-I/usr/include/opencv4",
       "-isystem",
       "/usr/include/qt",
@@ -53,11 +53,11 @@
       "-c",
       "-o",
       "CMakeFiles/document_recognizer.dir/mainwindow.cpp.o",
-      "/home/aladin/programming/malinski_3_sem/qtProgramm/mainwindow.cpp"
+      "/home/aladin/programming/document_owner_recognize/qtProgramm/mainwindow.cpp"
     ],
-    "directory": "/home/aladin/programming/malinski_3_sem/qtProgramm/build",
-    "file": "/home/aladin/programming/malinski_3_sem/qtProgramm/mainwindow.cpp",
-    "output": "/home/aladin/programming/malinski_3_sem/qtProgramm/build/CMakeFiles/document_recognizer.dir/mainwindow.cpp.o"
+    "directory": "/home/aladin/programming/document_owner_recognize/qtProgramm/build",
+    "file": "/home/aladin/programming/document_owner_recognize/qtProgramm/mainwindow.cpp",
+    "output": "/home/aladin/programming/document_owner_recognize/qtProgramm/build/CMakeFiles/document_recognizer.dir/mainwindow.cpp.o"
   },
   {
     "arguments": [
@@ -66,7 +66,7 @@
       "-DQT_GUI_LIB",
       "-DQT_NO_DEBUG",
       "-DQT_WIDGETS_LIB",
-      "-I/home/aladin/programming/malinski_3_sem/qtProgramm/build/document_recognizer_autogen/include",
+      "-I/home/aladin/programming/document_owner_recognize/qtProgramm/build/document_recognizer_autogen/include",
       "-I/usr/include/opencv4",
       "-isystem",
       "/usr/include/qt",
@@ -83,10 +83,10 @@
       "-c",
       "-o",
       "CMakeFiles/document_recognizer.dir/main.cpp.o",
-      "/home/aladin/programming/malinski_3_sem/qtProgramm/main.cpp"
+      "/home/aladin/programming/document_owner_recognize/qtProgramm/main.cpp"
     ],
-    "directory": "/home/aladin/programming/malinski_3_sem/qtProgramm/build",
-    "file": "/home/aladin/programming/malinski_3_sem/qtProgramm/main.cpp",
-    "output": "/home/aladin/programming/malinski_3_sem/qtProgramm/build/CMakeFiles/document_recognizer.dir/main.cpp.o"
+    "directory": "/home/aladin/programming/document_owner_recognize/qtProgramm/build",
+    "file": "/home/aladin/programming/document_owner_recognize/qtProgramm/main.cpp",
+    "output": "/home/aladin/programming/document_owner_recognize/qtProgramm/build/CMakeFiles/document_recognizer.dir/main.cpp.o"
   }
 ]

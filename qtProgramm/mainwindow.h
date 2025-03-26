@@ -13,10 +13,13 @@
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QString>
+#include <iostream>
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include "Recognizer.h"
+
 
 class MainWindow : public QWidget
 {
@@ -26,6 +29,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
+    Recognizer recognizer_tool;
     QPushButton* check_signature;
     QPushButton* settings_button;
     QPushButton* manual_select_area;

@@ -8,7 +8,7 @@
 #define PAPER_PARTS_HEIGHT 5
 #define PAPER_PARTS_WIDTH 5
 
-const std::string model_path = "best_model.tf";
+const std::string model_path = "sem_model_tf";
 const std::string input_layer = "serving_default_xception_input:0";
 const std::string output_layer = "StatefulPartitionedCall:0";
 const int img_h = 128;
